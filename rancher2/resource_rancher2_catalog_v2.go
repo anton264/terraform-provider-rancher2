@@ -48,7 +48,7 @@ func resourceRancher2CatalogV2Create(d *schema.ResourceData, meta interface{}) e
 	d.SetId(clusterID + catalogV2ClusterIDsep + newCatalog.ID)
 	stateConf := &resource.StateChangeConf{
 		Pending:    []string{},
-		Target:     []string{"downloaded"},
+		Target:     []string{"downloaded","OCIDownloaded"},
 		Refresh:    catalogV2StateRefreshFunc(meta, clusterID, newCatalog.ID),
 		Timeout:    d.Timeout(schema.TimeoutCreate),
 		Delay:      1 * time.Second,
@@ -103,7 +103,7 @@ func resourceRancher2CatalogV2Update(d *schema.ResourceData, meta interface{}) e
 	d.SetId(clusterID + catalogV2ClusterIDsep + newCatalog.ID)
 	stateConf := &resource.StateChangeConf{
 		Pending:    []string{},
-		Target:     []string{"downloaded"},
+		Target:     []string{"downloaded","OCIDownloaded"},
 		Refresh:    catalogV2StateRefreshFunc(meta, clusterID, newCatalog.ID),
 		Timeout:    d.Timeout(schema.TimeoutCreate),
 		Delay:      1 * time.Second,
